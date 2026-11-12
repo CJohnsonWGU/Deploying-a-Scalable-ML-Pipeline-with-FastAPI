@@ -99,6 +99,8 @@ def load_model(path):
 
     with open(path, "rb") as file:
         restored_data = pickle.load(file)
+    
+    return restored_data
 
     pass
 
