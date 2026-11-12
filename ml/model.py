@@ -25,7 +25,7 @@ def train_model(X_train, y_train):
 
     model = RandomForestClassifier(n_estimators = 100, max_depth=10)
 
-    model.fit(x_train, y_train)
+    model.fit(X_train, y_train)
 
     return model
 
@@ -70,7 +70,7 @@ def inference(model, X):
     """
     # TODO: implement the function
 
-    preds = model.predict(x)
+    preds = model.predict(X)
 
     return preds
 
