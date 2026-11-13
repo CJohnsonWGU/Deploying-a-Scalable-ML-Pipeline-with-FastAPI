@@ -23,7 +23,7 @@ def train_model(X_train, y_train):
     """
     # TODO: implement the function
 
-    model = RandomForestClassifier(n_estimators = 100, max_depth=10)
+    model = RandomForestClassifier()
 
     model.fit(X_train, y_train)
 
