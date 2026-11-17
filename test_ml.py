@@ -9,8 +9,6 @@ from sklearn.ensemble import RandomForestClassifier
 from ml.data import process_data
 from ml.model import (train_model, inference, compute_model_metrics,)
 
-test_project_path = "/workspace/Deploying-a-Scalable-ML-Pipeline-with-FastAPI"
-
 test_features = [
     "workclass",
     "education",
@@ -27,7 +25,7 @@ def test_data():
     """
     # load 10,000 rows of data from census.csv
     """
-    test_data_path = os.path.join(test_project_path, "data", "census.csv")
+    test_data_path = os.path.join("data", "census.csv")
     test_data = pd.read_csv(test_data_path)
     return test_data.sample(10000)
 
@@ -68,7 +66,7 @@ def test_two(test_data):
     """
     # Your code here
 
-    test_model_path = os.path.join(test_project_path, "model", "model.pkl")
+    test_model_path = os.path.join("model", "model.pkl")
 
     with open(test_model_path, "rb") as f:
         saved_model = pickle.load(f)
@@ -91,5 +89,5 @@ def test_three(create_test_model):
     for score in (precision, recall, fbeta):
         assert isinstance(score, float)
         assert 0.0 <= score <= 1.0
-        
+
     pass
