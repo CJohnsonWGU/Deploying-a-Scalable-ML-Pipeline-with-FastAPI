@@ -1,8 +1,9 @@
 import pytest
 # TODO: add necessary import
 import os
-import pandas as pd
 import pickle
+import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
@@ -79,15 +80,22 @@ def test_two(test_data):
 # TODO: implement the third test. Change the function name and input as needed
 def test_three(create_test_model):
     """
-    # verify that compute_model_metrics returns scores as float
+    # verify that compute_model_metrics returns known precision, recall and F1 values.
+    # distinct values are used to also check for proper return order.
     """
     # Your code here
 
-    x, y, test_model = create_test_model
-    test_preds = inference(test_model, x)
-    precision, recall, fbeta = compute_model_metrics(y, test_preds)
-    for score in (precision, recall, fbeta):
-        assert isinstance(score, float)
-        assert 0.0 <= score <= 1.0
+    y_true = np.array([1, 1, 1, 1, 0, 0])
+    y_pred = np.array([1, 1, 0, 0, 1, 0])
 
+    expected_precision = 2 / 3
+    expected_recall = 0.5
+    expected_fbeta = 4 / 7
+
+    precision, recall, fbeta = compute_model_metrics(y_true, y_pred)
+
+    assert precision == pytest.approx(expected_precision, rel = 1e-6)
+    assert recall == pytest.approx(expected_recall, rel = 1e-6)
+    assert fbeta == pytest.approx(expected_fbeta, rel = 1e-6)
+    
     pass
