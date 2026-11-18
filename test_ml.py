@@ -8,18 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
 from ml.data import process_data
-from ml.model import (train_model, inference, compute_model_metrics,)
-
-test_features = [
-    "workclass",
-    "education",
-    "marital-status",
-    "occupation",
-    "relationship",
-    "race",
-    "sex",
-    "native-country",
-]
+from ml.model import compute_model_metrics
 
 @pytest.fixture(scope="module")
 def test_data():
@@ -29,17 +18,6 @@ def test_data():
     test_data_path = os.path.join("data", "census.csv")
     test_data = pd.read_csv(test_data_path)
     return test_data.sample(10000)
-
-@pytest.fixture(scope="module")
-def create_test_model(test_data):
-    x, y, encoder, lb = process_data(
-        test_data,
-        categorical_features = test_features,
-        label = "salary",
-        training = True,
-    )
-    test_model = train_model(x, y)
-    return x, y, test_model
 
 # TODO: implement the first test. Change the function name and input as needed
 def test_one(test_data):
@@ -78,7 +56,7 @@ def test_two(test_data):
 
 
 # TODO: implement the third test. Change the function name and input as needed
-def test_three(create_test_model):
+def test_three():
     """
     # verify that compute_model_metrics returns known precision, recall and F1 values.
     # distinct values are used to also check for proper return order.
